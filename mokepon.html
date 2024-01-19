@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mokepon</title>
+    <script src="mokepon.js"></script>
+</head>
+<body>
+    <h1>MOKEPON 💧🔥🌿</h1>
+
+    <section id="seleccionar-mascota">
+        <h2>Elige tu mascota</h2>
+        <input type="radio" name="mascota" id="hipodoge">
+        <label for="hipodoge">Hipodoge</label>
+        <!-- Hipodoge -> Agua  -->
+        <input type="radio" name="mascota" id="capipepo">
+        <label for="capipepo">Capipepo</label>
+        <!-- Capipepo -> Tierra  -->
+        <input type="radio" name="mascota" id="ratigueya">
+        <label for="ratigueya">Ratigueya</label>
+        <!-- Ratigueya -> Fuego  -->
+        <!-- <label for="langostelvis">Langostelvis</label>
+        <input type="radio" name="mascota" id="langostelvis">
+        Langostelvis -> Agua y Fuego 
+        <label for="tucapalma">Tucapalma</label>
+        <input type="radio" name="mascota" id="tucapalma">
+        Tucapalma -> Agua y Tierra 
+        <label for="pydos">Pydos</label>
+        <input type="radio" name="mascota" id="pydos">
+        Pydos -> Tierra y Fuego -->
+        
+        <button id="boton-mascota">Seleccionar</button>
+    </section>
+
+    <section id="seleccionar-ataque">
+        <h2>Elige tu ataque</h2>
+
+        <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador"> 3 </span> vidas</p>
+        <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo"> 3 </span> vidas</p>
+
+        <p>
+            <button id="boton-fuego">Fuego 🔥</button>
+            <button id="boton-agua">Agua 💧</button>
+            <button id="boton-tierra"> Tierra 🌿</button>
+        </p>
+    </section>
+
+    <section id="mensajes"></section>
+    <section id="reiniciar">
+        <button id="boton-reiniciar">reiniciar</button>
+    </section>
+
+</body>
+</html>
