@@ -120,8 +120,8 @@ function crearMensaje (resultado) {
     nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
 
     // parrafo.innerHTML = `Tu mascota ataco con ${ataqueJugador}, la mascota del enemigo ataco con ${ataqueEnemigo} - ${resultado}`
-    ataquesDelEnemigo.appendChild(nuevoAtaqueDelJugador)
-    ataquesDelJugador.appendChild(nuevoAtaqueDelEnemigo)
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
+    ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 
 }
 function crearMensajeFinal (resultadoFinal) {
