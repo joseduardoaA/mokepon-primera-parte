@@ -19,6 +19,7 @@ body{
 .subtitulo{
     color: white;
     font-size: 24px;
+    text-align: center;
 }
 
 .tarjeta-de-mokepon {
@@ -56,15 +57,16 @@ input:checked + label{
 
 #boton-mascota {
     background-color: transparent;
-    width: 190px; /* LARGO */
-    height: 50px; /* ALTO */
-    box-sizing: border-box;
-    border-radius: 20px;
-    border: 2px solid white;
-    margin: 20px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+    justify-content: center;
+    width: 190px; /* LARGO */
+   height: 50px; /* ALTO */
+   box-sizing: border-box;
+   border-radius: 20px;
+   border: 2px solid white;
+   margin: 20px; 
+   margin-left: 40px;
 
 }
 #seleccionar-ataque {
