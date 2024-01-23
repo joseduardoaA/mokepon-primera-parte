@@ -124,7 +124,7 @@ input:checked + label{
 
 
 
-@media (max-width:600px ) {
+@media (max-width:350px ) {
     .tarjetas {
         flex-direction: column;
     }
