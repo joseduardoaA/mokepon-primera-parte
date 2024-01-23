@@ -99,7 +99,9 @@ input:checked + label{
 #boton-reiniciar {
     border: none;
     color: #11468f;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Fredoka', sans-serif;
+    padding: 15px;
+
 
 }
 
