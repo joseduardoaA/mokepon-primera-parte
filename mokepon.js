@@ -1,37 +1,61 @@
+const sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
+const botonMascotaJugador = document.getElementById("boton-mascota") 
+const botonReiniciar = document.getElementById("boton-reiniciar")
+const botonTierra = document.getElementById("boton-tierra") 
+const botonFuego = document.getElementById("boton-fuego") 
+const botonAgua = document.getElementById("boton-agua") 
+
+const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
+const spanMascotaJugador = document.getElementById("mascota-jugador")
+const inputRatigueya = document.getElementById("ratigueya")
+const inputHipodogue = document.getElementById("hipodoge")
+const inputCapipepo = document.getElementById("capipepo")
+
+const spanMascotaEnemigo = document.getElementById("mascota-enemigo")
+
+const spanVidasJugador = document.getElementById("vidas-jugador")
+const spanVidasEnemigo = document.getElementById("vidas-enemigo")
+
+const sectionMensajes = document.getElementById("resultado")
+const ataquesDelJugador = document.getElementById("ataque-del-jugador")
+const ataquesDelEnemigo = document.getElementById("ataque-del-enemigo")
+
+let mokepones = []
 let ataqueJugador 
 let ataqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+class Mokepon {
+    constructor(nombre, foto, vida) {
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+    }
+    
+}
+
+let hipodoge = new Mokepon("Hipodoge", "assets/mokepons_mokepon_hipodoge_attack.png", 3 )
+let capipepo = new Mokepon("Capipepo", "assets/mokepons_mokepon_capipepo_attack.png", 3 )
+let ratigueya = new Mokepon("Ratigueya", "assets/mokepons_mokepon_ratigueya_attack.png", 3 )
+
+mokepones.push(hipodoge, capipepo, ratigueya)
+console.log(mokepones)
+
 function iniciarJuego() {
-    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
     /*Con la propiedad .style.display = "none" podemos ocultar elementos de HTML
       Si lo escribimos .style.display = "block" podemos volver a verlo */
     sectionSeleccionarAtaque.style.display = "none"
-    
     // Aqui le estoy diciendo que botonMascotaJugador va atener el valor de document.getElementById("boton-mascota") lo que hace es buscar el elemento ppor el ID, el ID se lo pasamos por comillas y una vez encontrado lo podemos nanipular
-    let botonMascotaJugador = document.getElementById("boton-mascota") 
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
-    let botonFuego = document.getElementById("boton-fuego") 
     botonFuego.addEventListener("click", ataqueFuego)
-    let botonAgua = document.getElementById("boton-agua") 
     botonAgua.addEventListener("click", ataqueAgua)
-    let botonTierra = document.getElementById("boton-tierra") 
     botonTierra.addEventListener("click", ataqueTierra)
-    let botonReiniciar = document.getElementById("boton-reiniciar")
     botonReiniciar.addEventListener("click", reiniciarJuego)
     botonReiniciar.style.display = "none"
 }
 function seleccionarMacotaJugador () {
-    let sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
     sectionSeleccionarMascota.style.display = "none"
-
-    let inputHipodogue = document.getElementById("hipodoge")
-    let inputCapipepo = document.getElementById("capipepo")
-    let inputRatigueya = document.getElementById("ratigueya")
-    let spanMascotaJugador = document.getElementById("mascota-jugador")
-
-    let sectionSeleccionarAtaque = document.getElementById("seleccionar-ataque")
     sectionSeleccionarAtaque.style.display = "flex"
     // Si el elemento con ID Hipoge tiene la propiedad CHECKED va a disparar una alerta
     if (inputHipodogue.checked) {
@@ -47,7 +71,6 @@ function seleccionarMacotaJugador () {
 }
 function seleccionarMacotaEnemigo() {
     let mascotaAleatorio = aleatorio(1,3)
-    let spanMascotaEnemigo = document.getElementById("mascota-enemigo")
     if (mascotaAleatorio == 1) {
         spanMascotaEnemigo.innerHTML = ("Hipodoge")
     } else if (mascotaAleatorio == 2) {
@@ -56,7 +79,6 @@ function seleccionarMacotaEnemigo() {
         spanMascotaEnemigo.innerHTML = ("Ratigueya")
     }
 }
-
 function ataqueFuego() {
     ataqueJugador = "FUEGO"
     ataqueAleatorioEnemigo()
@@ -64,7 +86,6 @@ function ataqueFuego() {
 function ataqueAgua() {
     ataqueJugador = "AGUA"
     ataqueAleatorioEnemigo()
-    
 }
 function ataqueTierra() {
     ataqueJugador = "TIERRA"
@@ -81,10 +102,7 @@ function ataqueAleatorioEnemigo  () {
     }
     batalla()
 }
-
 function batalla () { 
-    let spanVidasJugador = document.getElementById("vidas-jugador")
-    let spanVidasEnemigo = document.getElementById("vidas-enemigo")
     if (ataqueJugador == ataqueEnemigo) {
         crearMensaje("EMPATE")
     } else if (ataqueJugador =="FUEGO" && ataqueEnemigo == "TIERRA" || ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO" || ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA") {
@@ -106,47 +124,29 @@ function revisarVidas () {
         crearMensajeFinal("Lo siento, perdiste 😔")
     ]
 }
-
 function crearMensaje (resultado) {
-    let sectionMensajes = document.getElementById("resultado")
-    let ataquesDelJugador = document.getElementById("ataque-del-jugador")
-    let ataquesDelEnemigo = document.getElementById("ataque-del-enemigo")
-    
     let nuevoAtaqueDelJugador =  document.createElement("p")
     let nuevoAtaqueDelEnemigo =  document.createElement("p")
-
     sectionMensajes.innerHTML = resultado
     nuevoAtaqueDelJugador.innerHTML = ataqueJugador
     nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
-
     // parrafo.innerHTML = `Tu mascota ataco con ${ataqueJugador}, la mascota del enemigo ataco con ${ataqueEnemigo} - ${resultado}`
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
-
 }
 function crearMensajeFinal (resultadoFinal) {
-    let sectionMensajes = document.getElementById("resultado")
     sectionMensajes.innerHTML = resultadoFinal
-
 // Con esto hacemos que los botones queden deshabilitados cuando se envie el mensaje final 
-    let botonFuego = document.getElementById("boton-fuego") 
     botonFuego.disabled = true
-    let botonAgua = document.getElementById("boton-agua") 
     botonAgua.disabled = true
-    let botonTierra = document.getElementById("boton-tierra") 
     botonTierra.disabled = true
-    let botonReiniciar = document.getElementById("boton-reiniciar")
     botonReiniciar.style.display = "block"
-
 }
-
 // Esta funcion nos ayuda a reiniciar el juego con el metodo location.reload()
 function reiniciarJuego(){
     location.reload()
 }
-
 function aleatorio(min, max){
     return Math.floor( Math.random()* (max - min + 1)+min)
 }
-
 window.addEventListener("load", iniciarJuego)

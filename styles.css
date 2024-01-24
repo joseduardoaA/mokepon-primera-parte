@@ -61,12 +61,12 @@ input:checked + label{
     font-family: 'Poppins', sans-serif;
     justify-content: center;
     width: 190px; /* LARGO */
-   height: 50px; /* ALTO */
-   box-sizing: border-box;
-   border-radius: 20px;
-   border: 2px solid white;
-   margin: 20px; 
-   margin-left: 40px;
+    height: 50px; /* ALTO */
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 2px solid white;
+    margin: 20px; 
+    margin-left: 40px;
 
 }
 #seleccionar-ataque {
