@@ -19,10 +19,12 @@ const spanVidasEnemigo = document.getElementById("vidas-enemigo")
 const sectionMensajes = document.getElementById("resultado")
 const ataquesDelJugador = document.getElementById("ataque-del-jugador")
 const ataquesDelEnemigo = document.getElementById("ataque-del-enemigo")
+const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 
 let mokepones = []
 let ataqueJugador 
 let ataqueEnemigo
+let opcionDeMokepones
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -31,22 +33,55 @@ class Mokepon {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques = []
     }
     
 }
 
-let hipodoge = new Mokepon("Hipodoge", "assets/mokepons_mokepon_hipodoge_attack.png", 3 )
-let capipepo = new Mokepon("Capipepo", "assets/mokepons_mokepon_capipepo_attack.png", 3 )
-let ratigueya = new Mokepon("Ratigueya", "assets/mokepons_mokepon_ratigueya_attack.png", 3 )
+// Estos son Objetos-Instancia porque se construyen a partir de una clase, solo les colocamos las propiedades, la clase Mokepon
+let hipodoge = new Mokepon("Hipodoge","mokepons_mokepon_hipodoge_attack.png", 3 )
+let capipepo = new Mokepon("Capipepo","mokepons_mokepon_capipepo_attack.png", 3 )
+let ratigueya = new Mokepon("Ratigueya","mokepons_mokepon_ratigueya_attack.png", 3 )
 
-mokepones.push(hipodoge, capipepo, ratigueya)
-console.log(mokepones)
+/* Esto es un Objeto Literal poruqe se crea de 0 y solo van a guardar informacion
+ Creo un Objeto, le coloco nombre y su ID que es la misma que en el HTML  */
+hipodoge.ataques.push(
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "💧", id: "boton-agua"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🌿", id: "boton-tierra"},
+)
+capipepo.ataques.push(
+    {nombre: "🌿", id: "boton-tierra"},
+    {nombre: "🌿", id: "boton-tierra"},
+    {nombre: "🌿", id: "boton-tierra"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "💧", id: "boton-agua"},
+)
+ratigueya.ataques.push(
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🔥", id: "boton-fuego"},
+    {nombre: "🌿", id: "boton-tierra"},
+    {nombre: "💧", id: "boton-agua"},
+)
+
+mokepones.push(hipodoge,capipepo,ratigueya)
 
 function iniciarJuego() {
     /*Con la propiedad .style.display = "none" podemos ocultar elementos de HTML
       Si lo escribimos .style.display = "block" podemos volver a verlo */
     sectionSeleccionarAtaque.style.display = "none"
-    // Aqui le estoy diciendo que botonMascotaJugador va atener el valor de document.getElementById("boton-mascota") lo que hace es buscar el elemento ppor el ID, el ID se lo pasamos por comillas y una vez encontrado lo podemos nanipular
+
+    mokepones.forEach((mokepon)=> {
+        opcionDeMokepones = `<input type="radio" name="mascota" id=${mokepon.nombre}>
+        <label class="tarjeta-de-mokepon"  for=${mokepon.nombre}>
+            <p>${mokepon.nombre}</p>
+            <img src=${mokepon.foto} alt=${mokepon.nombre}>
+        </label>`
+        contenedorTarjetas.innerHTML += opcionDeMokepones
+    })
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
     botonFuego.addEventListener("click", ataqueFuego)
     botonAgua.addEventListener("click", ataqueAgua)
