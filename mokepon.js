@@ -7,9 +7,6 @@ const botonAgua = document.getElementById("boton-agua")
 
 const sectionSeleccionarMascota = document.getElementById("seleccionar-mascota")
 const spanMascotaJugador = document.getElementById("mascota-jugador")
-const inputRatigueya = document.getElementById("ratigueya")
-const inputHipodogue = document.getElementById("hipodoge")
-const inputCapipepo = document.getElementById("capipepo")
 
 const spanMascotaEnemigo = document.getElementById("mascota-enemigo")
 
@@ -25,6 +22,9 @@ let mokepones = []
 let ataqueJugador 
 let ataqueEnemigo
 let opcionDeMokepones
+let inputRatigueya 
+let inputHipodogue 
+let inputCapipepo 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -39,9 +39,9 @@ class Mokepon {
 }
 
 // Estos son Objetos-Instancia porque se construyen a partir de una clase, solo les colocamos las propiedades, la clase Mokepon
-let hipodoge = new Mokepon("Hipodoge","mokepons_mokepon_hipodoge_attack.png", 3 )
-let capipepo = new Mokepon("Capipepo","mokepons_mokepon_capipepo_attack.png", 3 )
-let ratigueya = new Mokepon("Ratigueya","mokepons_mokepon_ratigueya_attack.png", 3 )
+let hipodoge = new Mokepon("hipodoge","mokepons_mokepon_hipodoge_attack.png", 3 )
+let capipepo = new Mokepon("capipepo","mokepons_mokepon_capipepo_attack.png", 3 )
+let ratigueya = new Mokepon("ratigueya","mokepons_mokepon_ratigueya_attack.png", 3 )
 
 /* Esto es un Objeto Literal poruqe se crea de 0 y solo van a guardar informacion
  Creo un Objeto, le coloco nombre y su ID que es la misma que en el HTML  */
@@ -81,6 +81,9 @@ function iniciarJuego() {
             <img src=${mokepon.foto} alt=${mokepon.nombre}>
         </label>`
         contenedorTarjetas.innerHTML += opcionDeMokepones
+        inputRatigueya = document.getElementById("ratigueya")
+        inputHipodogue = document.getElementById("hipodoge")
+        inputCapipepo = document.getElementById("capipepo")
     })
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
     botonFuego.addEventListener("click", ataqueFuego)
@@ -153,7 +156,7 @@ function batalla () {
 }
 function revisarVidas () {
     if(vidasEnemigo == 0){
-        crearMensajeFinal("FELICITACIONES! Ganaste 🎉")
+        crearMensajeFinal("FELICITACIONES Ganaste")
         
     } else if (vidasJugador == 0)[
         crearMensajeFinal("Lo siento, perdiste 😔")
