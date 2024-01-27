@@ -152,14 +152,17 @@ function secuenciaDeAtaque () {
                 ataqueJugador.push("FUEGO")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             } else if (e.target.textContent === "💧") {
                 ataqueJugador.push("AGUA")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             } else {
                 ataqueJugador.push("TIERRA")
                 console.log(ataqueJugador)
                 boton.style.background = "#112f58"
+                boton.disabled = true
             }
             ataqueAleatorioEnemigo()
         })
@@ -252,9 +255,6 @@ function crearMensaje (resultado) {
 function crearMensajeFinal (resultadoFinal) {
     sectionMensajes.innerHTML = resultadoFinal
 // Con esto hacemos que los botones queden deshabilitados cuando se envie el mensaje final 
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
     botonReiniciar.style.display = "block"
 }
 // Esta funcion nos ayuda a reiniciar el juego con el metodo location.reload()
