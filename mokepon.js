@@ -43,17 +43,31 @@ let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = "mokemap.png"
 let mascotaJugadorObjeto
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 350
+
+if (anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+
+
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
+
 
 class Mokepon {
-    constructor(nombre, foto, vida, fotoMapa,x = 10, y = 10) {
+    constructor(nombre, foto, vida, fotoMapa) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 40
         this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -77,9 +91,9 @@ let hipodoge = new Mokepon("hipodoge","mokepons_mokepon_hipodoge_attack.png", 5,
 let capipepo = new Mokepon("capipepo","mokepons_mokepon_capipepo_attack.png", 5, "capipepo.png" )
 let ratigueya = new Mokepon("ratigueya","mokepons_mokepon_ratigueya_attack.png", 5, "ratigueya.png" )
 
-let hipodogeEnemigo = new Mokepon("hipodoge","mokepons_mokepon_hipodoge_attack.png", 5, "hipodoge.png", 80, 120)
-let capipepoEnemigo = new Mokepon("capipepo","mokepons_mokepon_capipepo_attack.png", 5, "capipepo.png", 150,95 )
-let ratigueyaEnemigo = new Mokepon("ratigueya","mokepons_mokepon_ratigueya_attack.png", 5, "ratigueya.png",200,190 )
+let hipodogeEnemigo = new Mokepon("hipodoge","mokepons_mokepon_hipodoge_attack.png", 5, "hipodoge.png")
+let capipepoEnemigo = new Mokepon("capipepo","mokepons_mokepon_capipepo_attack.png", 5, "capipepo.png")
+let ratigueyaEnemigo = new Mokepon("ratigueya","mokepons_mokepon_ratigueya_attack.png", 5, "ratigueya.png")
 
 
 /* Esto es un Objeto Literal poruqe se crea de 0 y solo van a guardar informacion
@@ -131,7 +145,7 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
 
     botonReiniciar.addEventListener("click", reiniciarJuego)
-    // botonReiniciar.style.display = "none"
+    botonReiniciar.style.display = "none"
 }
 function seleccionarMacotaJugador () {
     sectionSeleccionarMascota.style.display = "none"
@@ -199,9 +213,6 @@ function secuenciaDeAtaque () {
 }
 
 function seleccionarMacotaEnemigo(enemigo) {
-    // let mascotaAleatorio = aleatorio(0,mokepones.length -1)
-    // spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    // ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
     spanMascotaEnemigo.innerHTML = enemigo.nombre
     ataquesMokeponEnemigo = enemigo.ataques
     secuenciaDeAtaque ()
@@ -272,9 +283,9 @@ function crearMensaje (resultado) {
 }
 function crearMensajeFinal (resultadoFinal) {
     sectionMensajes.innerHTML = resultadoFinal
-    sectionReiniciar.style.display='block'
+    // botonReiniciar.style.display='block'
 // Con esto hacemos que los botones queden deshabilitados cuando se envie el mensaje final 
-    // botonReiniciar.style.display = "block"
+    botonReiniciar.style.display = "block"
 }
 // Esta funcion nos ayuda a reiniciar el juego con el metodo location.reload()
 function reiniciarJuego(){
@@ -349,8 +360,6 @@ function sePresionaUnaTecla (event) {
 
 
 function iniciarMapa() {
-    mapa.width = 320
-    mapa.height = 240
     mascotaJugadorObjeto = obtenerObjetoMacota(mascotaJugador)
     console.log(mascotaJugadorObjeto, mascotaJugador)
     intervalo = setInterval(pintarCanvas, 50)
