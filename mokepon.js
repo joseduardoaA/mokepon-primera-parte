@@ -91,6 +91,7 @@ hipodoge.ataques.push(
     {nombre: "🔥", id: "boton-fuego"},
     {nombre: "🌿", id: "boton-tierra"},
 )
+hipodogeEnemigo.ataques.push({nombre:'💧',id:'boton-agua'},{nombre:'💧',id:'boton-agua'},{nombre:'💧',id:'boton-agua'},{nombre:'🔥',id:'boton-fuego'},{nombre:'🌱',id:'boton-tierra'},)
 capipepo.ataques.push(
     {nombre: "🌿", id: "boton-tierra"},
     {nombre: "🌿", id: "boton-tierra"},
@@ -98,6 +99,7 @@ capipepo.ataques.push(
     {nombre: "🔥", id: "boton-fuego"},
     {nombre: "💧", id: "boton-agua"},
 )
+capipepoEnemigo.ataques.push({nombre:'🌱',id:'boton-tierra'},{nombre:'🌱',id:'boton-tierra'},{nombre:'🌱',id:'boton-tierra'},{nombre:'💧',id:'boton-agua'},{nombre:'🔥',id:'boton-fuego'},)
 ratigueya.ataques.push(
     {nombre: "🔥", id: "boton-fuego"},
     {nombre: "🔥", id: "boton-fuego"},
@@ -105,6 +107,7 @@ ratigueya.ataques.push(
     {nombre: "🌿", id: "boton-tierra"},
     {nombre: "💧", id: "boton-agua"},
 )
+ratigueyaEnemigo.ataques.push({nombre:'🔥',id:'boton-fuego'},{nombre:'🔥',id:'boton-fuego'},{nombre:'🔥',id:'boton-fuego'},{nombre:'💧',id:'boton-agua'},{nombre:'🌱',id:'boton-tierra'},)
 
 mokepones.push(hipodoge,capipepo,ratigueya)
 
@@ -128,12 +131,10 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
 
     botonReiniciar.addEventListener("click", reiniciarJuego)
-    botonReiniciar.style.display = "none"
+    // botonReiniciar.style.display = "none"
 }
 function seleccionarMacotaJugador () {
     sectionSeleccionarMascota.style.display = "none"
-
-
     // Si el elemento con ID Hipoge tiene la propiedad CHECKED va a disparar una alerta
     if (inputHipodogue.checked) {
         spanMascotaJugador.innerHTML = inputHipodogue.id
@@ -147,21 +148,16 @@ function seleccionarMacotaJugador () {
     } else{
         alert("Seleciona una mascota")
         reiniciarJuego()}
-        
         extraerAtaques(mascotaJugador)         
         sectionVerMapa.style.display = "flex"
-        iniciarMapa()
-    seleccionarMacotaEnemigo()
-    function extraerAtaques (mascotaJugador) {
-        let ataques 
-        for (let i = 0; i < mokepones.length; i++) {
-            if (mascotaJugador === mokepones[i].nombre) {
-                ataques = mokepones[i].ataques
-            }
-        }
+        iniciarMapa()}
 
-        mostrarAtaques(ataques)
-    }
+function extraerAtaques (mascotaJugador) {
+    let ataques
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            ataques = mokepones[i].ataques}}
+            mostrarAtaques(ataques)}
 
 
     function mostrarAtaques (ataques) {
@@ -175,7 +171,7 @@ function seleccionarMacotaJugador () {
         botones = document.querySelectorAll(".BAtaque")
 
     }
-}
+
 
 
 function secuenciaDeAtaque () {
@@ -202,39 +198,28 @@ function secuenciaDeAtaque () {
     })
 }
 
-function seleccionarMacotaEnemigo() {
-    let mascotaAleatorio = aleatorio(0,mokepones.length -1)
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
+function seleccionarMacotaEnemigo(enemigo) {
+    // let mascotaAleatorio = aleatorio(0,mokepones.length -1)
+    // spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
+    // ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
     secuenciaDeAtaque ()
 }
-function ataqueAleatorioEnemigo  () {
-    let ataqueAleatorio = aleatorio(1,ataquesMokeponEnemigo.length -1)
-    if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
-        ataqueEnemigo.push("FUEGO")
-    } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
-        ataqueEnemigo.push("AGUA")
-    } else {
-        ataqueEnemigo.push("TIERRA")
-    }
-    iniciarPelea()
-}
-
-
+function ataqueAleatorioEnemigo(){console.log('Ataques enemigo',ataquesMokeponEnemigo);let ataqueAleatorio=aleatorio(0,ataquesMokeponEnemigo.length-1)
+if(ataqueAleatorio==0||ataqueAleatorio==1){ataqueEnemigo.push('FUEGO')}else if(ataqueAleatorio==3||ataqueAleatorio==4){ataqueEnemigo.push('AGUA')}else{ataqueEnemigo.push('TIERRA')}
+console.log(ataqueEnemigo)
+iniciarPelea()}
 function iniciarPelea () {
     if (ataqueJugador.length === 5) {
         batalla()
     }
 }
 
-
-
 function indexAmbosOponentes (jugador, enemigo) {
     indexAtaqueJugador = ataqueJugador[jugador]
     indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
-
-
 
 function batalla () {
 
@@ -287,8 +272,9 @@ function crearMensaje (resultado) {
 }
 function crearMensajeFinal (resultadoFinal) {
     sectionMensajes.innerHTML = resultadoFinal
+    sectionReiniciar.style.display='block'
 // Con esto hacemos que los botones queden deshabilitados cuando se envie el mensaje final 
-    botonReiniciar.style.display = "block"
+    // botonReiniciar.style.display = "block"
 }
 // Esta funcion nos ayuda a reiniciar el juego con el metodo location.reload()
 function reiniciarJuego(){
@@ -365,7 +351,7 @@ function sePresionaUnaTecla (event) {
 function iniciarMapa() {
     mapa.width = 320
     mapa.height = 240
-    mascotaJugadorObjeto = ontenerObjetoMacota(mascotaJugador)
+    mascotaJugadorObjeto = obtenerObjetoMacota(mascotaJugador)
     console.log(mascotaJugadorObjeto, mascotaJugador)
     intervalo = setInterval(pintarCanvas, 50)
     window.addEventListener("keydown", sePresionaUnaTecla)
@@ -374,14 +360,14 @@ function iniciarMapa() {
 
 
 
-function ontenerObjetoMacota() {
+function obtenerObjetoMacota() {
     for (let i = 0; i < mokepones.length; i++) {
         if (mascotaJugador === mokepones[i].nombre) {
             return mokepones[i]
         }
     }
 
-    mostrarAtaques(ataques)
+    // mostrarAtaques(ataques)
 }
 
 function revisarColision(enemigo) {
@@ -406,10 +392,14 @@ function revisarColision(enemigo) {
         izquierdaMascota > derechaEnemigo
     ) {
         return;
-    } detenerMovimiento() 
-    alert(`Haz colisionado con ${enemigo.nombre}`)
+    } 
+    detenerMovimiento()
+    clearInterval(intervalo)
+    console.log("Se detecto una colision")
+    sectionSeleccionarAtaque.style.display = "flex"
+    sectionVerMapa.style.display = "none"
+    // alert(`Haz colisionado con ${enemigo.nombre}`)
+    seleccionarMacotaEnemigo(enemigo)
 }
 
-
 window.addEventListener("load", iniciarJuego)
-
