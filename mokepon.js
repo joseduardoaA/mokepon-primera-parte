@@ -18,6 +18,7 @@ const contenedorAtaques = document.getElementById("contenedor-ataques")
 const sectionVerMapa = document.getElementById("ver-mapa")
 const mapa = document.getElementById("mapa")
 
+let jugadorId = null
 let mokepones = []
 let ataqueEnemigo = []
 let opcionDeMokepones
@@ -145,6 +146,22 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener("click", seleccionarMacotaJugador)
 
     botonReiniciar.addEventListener("click", reiniciarJuego)
+
+    unirseAlJuego()
+
+
+function unirseAlJuego () {
+    fetch("http://localhost:5580/unirse")
+    .then(function (res) {
+        if (res.ok) {
+            res.text()
+                .then(function (respuesta) {
+                    console.log(respuesta)
+                    jugadorId = respuesta
+                })
+        }
+    })}
+
     botonReiniciar.style.display = "none"
 }
 function seleccionarMacotaJugador () {
@@ -162,9 +179,20 @@ function seleccionarMacotaJugador () {
     } else{
         alert("Seleciona una mascota")
         reiniciarJuego()}
-        extraerAtaques(mascotaJugador)         
-        sectionVerMapa.style.display = "flex"
-        iniciarMapa()}
+    
+    seleccionarMokepon(mascotaJugador)
+
+
+
+    extraerAtaques(mascotaJugador)         
+    sectionVerMapa.style.display = "flex"
+    iniciarMapa()}
+
+
+    function seleccionarMokepon(mascotaJugador){fetch(`http://localhost:5580/mokepon/${jugadorId}`,{method:"post",headers:{"Content-Type":"application/json"},body:JSON.stringify({mokepon:mascotaJugador})})}
+    function extraerAtaques(mascotaJugador){let ataques
+    for(let i=0;i<mokepones.length;i++){if(mascotaJugador===mokepones[i].nombre){ataques=mokepones[i].ataques}}
+    mostrarAtaques(ataques)}
 
 function extraerAtaques (mascotaJugador) {
     let ataques
